@@ -1,5 +1,6 @@
-from flask import Flask, jsonify
 import os
+
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 VERSION = os.getenv("APP_VERSION", "dev")
@@ -16,5 +17,7 @@ def greet(name):
 
 
 if __name__ == "__main__":
-    print("Starting server on http://127.0.0.1:8080 ...")
-    app.run(host="0.0.0.0", port=8080)
+    host = os.getenv("HOST", "127.0.0.1")
+    port = int(os.getenv("PORT", "8080"))
+    print(f"Starting server on http://{host}:{port} ...")
+    app.run(host=host, port=port)
